@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt
 import numpy as np
-
+import time 
 def on_connect(client, userdata, flags, rc):
     print("Connection returned result: " + str(rc))
-   # client.subscribe("ece180d/test", qos=1)
+    client.subscribe("ece180d/test", qos=2)
 
 def on_disconnect(client, userdata, rc):
     if rc !=0:
@@ -22,7 +22,17 @@ client.on_message = on_message
 client.connect_async('mqtt.eclipseprojects.io')
 client.loop_start()
 print('Publishing...')
-for i in range(10):
-    client.publish("ece180d/test", float(np.random.random(1)),qos=1)
+
+
+while True: 
+    
+
+    for i in range(10):
+        client.publish("channel1", float(np.random.random(1)),qos=1)
+        client.publish("channel2", float(np.random.random(1)),qos=1)
+
+    #print(count)
+    #count=count+1
+    pass
 client.loop_stop()
 client.disconnect()
