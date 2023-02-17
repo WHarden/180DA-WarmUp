@@ -24,7 +24,7 @@ def on_message(client, userdata, message):
 
     print('Received message: "' + str(message.payload) + '" on topic "' +
 message.topic + '" with QoS ' + str(message.qos))
-    client.publish("Messagae receieved")
+    #client.publish("Messagae receieved")
 
 # 1. create a client instance.
 client = mqtt.Client()
@@ -48,7 +48,7 @@ for i in range(10):
     client.publish("ece180d/test", float(np.random.random(1)),qos=2)
 # client.loop_forever()
 while True: 
-    client.publish("Messagae receieved")
+    #client.publish("ece180d/test",float(np.random.random(1)))
     time.sleep(1)
     pass
 

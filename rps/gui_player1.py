@@ -42,6 +42,8 @@ running=True
 selected=False
 output=False
 Result = None
+changed = False
+Score = 0
 
 while running:
   screen.fill(white)
@@ -74,26 +76,33 @@ while running:
     screen.blit(text,textRect)
     client.publish("channel2",user_selection)
 
-  if selected == True and opponent_selection != None:
+  if selected == True and opponent_selection != None and changed == False:
     output = True
     if user_selection == opponent_selection:
       Result = " It's a Tie!"
     elif user_selection == "rock":
       if opponent_selection == "paper":
         Result = " You lose!"
+        Score = Score-1
       if opponent_selection == "scissors":
         Result = " You win!"
+        Score = Score+1
 
     elif user_selection == "paper":
       if opponent_selection == "scissors":
         Result = " You lose!"
+        Score = Score-1
       if opponent_selection == "rock":
         Result = " You win!"
+        Score = Score+1
     elif user_selection == "scissors":
       if opponent_selection == "rock":
         Result = " You lose!"
+        Score = Score-1
       if opponent_selection == "paper":
         Result = " You win!"
+        Score = Score+1
+    changed = True
       
 
   #output
@@ -101,6 +110,11 @@ while running:
     text=font.render(Result,True,purple)
     textRect = text.get_rect()
     textRect.center=(300,400)
+    screen.blit(text,textRect)
+
+    text=font.render(str(Score),True,blue)
+    textRect = text.get_rect()
+    textRect.center=(450,450)
     screen.blit(text,textRect)
 
 
@@ -120,6 +134,7 @@ while running:
         selected = False
         output=False
         Result = None
+        changed = False
       if event.key == K_1:
         user_selection = "rock"
         selected = True

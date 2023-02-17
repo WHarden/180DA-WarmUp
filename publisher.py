@@ -28,8 +28,8 @@ while True:
     
 
     for i in range(10):
-        client.publish("channel1", float(np.random.random(1)),qos=1)
-        client.publish("channel2", float(np.random.random(1)),qos=1)
+        client.publish("ece180d/test", float(np.random.random(1)),qos=1)
+    time.sleep(2)
 
     #print(count)
     #count=count+1
